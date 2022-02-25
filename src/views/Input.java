@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import static java.util.stream.Collectors.toList;
+import static views.InputVerification.*;
 import static views.Output.println;
 
 public class Input {
@@ -21,8 +22,8 @@ public class Input {
 	public static int getPurchaseAmount() {
 		println.accept(OUTPUT_ASK_PURCHASE_AMOUNT);
 		String purchaseAmount = nextLine();
-		InputVerification.isValidPurchaseAmount(purchaseAmount);
-		return Integer.parseInt(purchaseAmount);
+		isValidPurchaseAmount(purchaseAmount);
+		return toInt(purchaseAmount);
 	}
 
 	public static int getBonusNumber(){
@@ -34,6 +35,7 @@ public class Input {
 	public static List<Integer> inputWinningNumbers(){
 		println.accept(OUTPUT_ASK_WINNING_NUMBER);
 		String textNumbers = nextLine();
+		isValidWinningNumbers(textNumbers);
 		List<Integer> winningNumbers = toInteger(textNumbers);
 		return winningNumbers;
 	}

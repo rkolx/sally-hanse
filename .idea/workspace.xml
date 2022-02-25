@@ -3,6 +3,12 @@
   <component name="ChangeListManager">
     <list default="true" id="2cd50443-8e79-4877-bbe6-5e315084e02b" name="Changes" comment="feat : 구입금액에 대한 검증 구현&#10;&#10;- Inputverification : 구입 금액에 따른 입력값 검증&#10;  - 공백, 문자열, 백의 자리 숫자, 최소 및 최대 금액 검증&quot;">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+<<<<<<< HEAD
+=======
+      <change beforePath="$PROJECT_DIR$/out/production/sally/views/Input.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sally/views/Input.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Input.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/views/InputVerification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/InputVerification.java" afterDir="false" />
+>>>>>>> e6065221b824c138928bfb5837035ce604462ea7
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,6 +43,11 @@
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.12062726" />
     <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RecentsManager">
+    <key name="IntroduceConstantDialog.RECENTS_KEY">
+      <recent name="views.InputVerification" />
+    </key>
   </component>
   <component name="RunManager">
     <configuration name="LottoApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
