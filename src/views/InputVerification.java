@@ -21,14 +21,10 @@ public class InputVerification {
     private static final String ERROR_OF_NOT_NUMBER = "숫자로만 입력해주세요. ";
     private static final String ERROR_NOT_THOUSAND_UNIT = "장당 천원입니다.";
     private static final String ERROR_OUT_OF_RANGE = "최소 천원 이상 최대 십만원 이하로 구매 가능합니다. " + ERROR_APPENDED_THOUSAND_PER_SHEETS;
-
     private static final String ERROR_RANGE_OF_LOTTO = "1~45 범위내 숫자 6개를 입력하세요";
     private static final String ERROR_NOT_INCLUDED_COMMA = "쉼표를 구분자로 " + ERROR_RANGE_OF_LOTTO;
-
     private static final String ERROR_DUPLICATED_SIX_NUMBER = "서로 다른 6개의 숫자를 입력해 주세요";
     private static final String ERROR_SIX_NUMBER = "숫자 6개를 입력하세요";
-
-
 
     public static void isValidPurchaseAmount(String purchaseAmount){
         String errorMessageWhenNotNumber = ERROR_OF_NOT_NUMBER + ERROR_APPENDED_THOUSAND_PER_SHEETS;
@@ -68,7 +64,7 @@ public class InputVerification {
         for (int i = 0; i < size; i++) {
             char winning = winnings[i];
             if (i == 0) {
-                isFirstDigit = checkFirstDigit(isFirstDigit, winning);
+                isFirstDigit = checkFirstDigit(winning);
             }
             if (!Character.isDigit(winning) && !isFirstDigit) {
                 throw new IllegalArgumentException(ERROR_NOT_INCLUDED_COMMA);
@@ -76,11 +72,11 @@ public class InputVerification {
         }
     }
 
-    private static boolean checkFirstDigit(boolean isFirstDigit, char winning) {
+    private static boolean checkFirstDigit(char winning) {
         if (Character.isDigit(winning)) {
-            isFirstDigit = true;
+            return true;
         }
-        return isFirstDigit;
+        return false;
     }
 
     private static String[] getSplit(String inputValues) {
@@ -114,7 +110,7 @@ public class InputVerification {
     private static void isValidRangeOf(String[] numbers) {
         Arrays.stream(numbers)
             .mapToInt(numberString -> toInt(numberString))
-            .filter(number -> (number < MIN_RANGE_OF_LOTTO_NUMBER) || (number > MIN_RANGE_OF_LOTTO_NUMBER))
+            .filter(number -> (number < MIN_RANGE_OF_LOTTO_NUMBER) || (number > MAX_RANGE_OF_LOTTO_NUMBER))
             .findAny()
             .ifPresent((outOfRangeNumber) -> {throw new IllegalArgumentException(ERROR_RANGE_OF_LOTTO);});
     }
