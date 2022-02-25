@@ -1,26 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="2cd50443-8e79-4877-bbe6-5e315084e02b" name="Changes" comment="feat : 구입금액에 대한 검증 구현&#10;&#10;- Inputverification : 구입 금액에 따른 입력값 검증&#10;  - 공백, 문자열, 백의 자리 숫자, 최소 및 최대 금액 검증&quot;">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-<<<<<<< HEAD
-=======
-      <change beforePath="$PROJECT_DIR$/out/production/sally/views/Input.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sally/views/Input.class" afterDir="false" />
+    <list default="true" id="6f3bfd70-6d9f-4e50-81f4-4737cc8c397f" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/sally.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/LottoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LottoApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Input.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/InputVerification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/InputVerification.java" afterDir="false" />
->>>>>>> e6065221b824c138928bfb5837035ce604462ea7
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
-  </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="Class" />
-      </list>
-    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -28,7 +23,7 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectId" id="25aCftPyyYG2K1IUtF5cSmUzziG" />
+  <component name="ProjectId" id="25b7hebpEBlPpAlPTLMAieMISHV" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -37,17 +32,9 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="nodejs_package_manager_path" value="npm" />
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.12062726" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
-  </component>
-  <component name="RecentsManager">
-    <key name="IntroduceConstantDialog.RECENTS_KEY">
-      <recent name="views.InputVerification" />
-    </key>
   </component>
   <component name="RunManager">
     <configuration name="LottoApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -66,39 +53,16 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="2cd50443-8e79-4877-bbe6-5e315084e02b" name="Changes" comment="" />
-      <created>1645755917268</created>
+      <changelist id="6f3bfd70-6d9f-4e50-81f4-4737cc8c397f" name="Changes" comment="" />
+      <created>1645784053066</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1645755917268</updated>
-      <workItem from="1645755918405" duration="12080000" />
+      <updated>1645784053066</updated>
+      <workItem from="1645784054225" duration="31000" />
     </task>
-    <task id="LOCAL-00001" summary="feat : 구입금액에 대한 검증 구현&#10;&#10;- Inputverification : 구입 금액에 따른 입력값 검증&#10;  - 공백, 문자열, 백의 자리 숫자, 최소 및 최대 금액 검증&quot;">
-      <created>1645767926100</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1645767926100</updated>
-    </task>
-    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="TAB_STATES">
-      <map>
-        <entry key="MAIN">
-          <value>
-            <State />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="feat : 구입금액에 대한 검증 구현&#10;&#10;- Inputverification : 구입 금액에 따른 입력값 검증&#10;  - 공백, 문자열, 백의 자리 숫자, 최소 및 최대 금액 검증&quot;" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat : 구입금액에 대한 검증 구현&#10;&#10;- Inputverification : 구입 금액에 따른 입력값 검증&#10;  - 공백, 문자열, 백의 자리 숫자, 최소 및 최대 금액 검증&quot;" />
   </component>
 </project>

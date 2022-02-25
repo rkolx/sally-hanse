@@ -26,10 +26,11 @@ public class Input {
 		return toInt(purchaseAmount);
 	}
 
-	public static int getBonusNumber(){
+	public static int getBonusNumber(List<Integer> inputValueOfWinningNumbers){
 		println.accept(OUTPUT_ASK_BONUSBALL);
-		int bonusNumber = nextInt();
-		return bonusNumber;
+		String bonusNumber = nextLine();
+		isValidBonusNumber(bonusNumber, inputValueOfWinningNumbers);
+		return toInt(bonusNumber);
 	}
 
 	public static List<Integer> inputWinningNumbers(){

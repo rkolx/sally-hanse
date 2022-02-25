@@ -21,7 +21,7 @@ public class LottoApplication {
 		showLottos(totalLottos);
 
 		List<Integer> inputValueOfWinningNumbers = inputWinningNumbers();
-		int bonusNumber = getBonusNumber();
+		int bonusNumber = getBonusNumber(inputValueOfWinningNumbers);
 
 		Ranking ranking = userLotto.getRankingFromWinningNumbers(inputValueOfWinningNumbers, bonusNumber);
 		getResultOfLotto(ranking, purchasedLotto.getPurchaseAmount());

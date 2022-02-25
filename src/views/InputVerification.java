@@ -2,6 +2,7 @@ package views;
 
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,9 +22,11 @@ public class InputVerification {
     private static final String ERROR_OF_NOT_NUMBER = "숫자로만 입력해주세요. ";
     private static final String ERROR_NOT_THOUSAND_UNIT = "장당 천원입니다.";
     private static final String ERROR_OUT_OF_RANGE = "최소 천원 이상 최대 십만원 이하로 구매 가능합니다. " + ERROR_APPENDED_THOUSAND_PER_SHEETS;
-    private static final String ERROR_RANGE_OF_LOTTO = "1~45 범위내 숫자 6개를 입력하세요";
+    private static final String ERROR_RANGE_OF_LOTTO = "1~45 범위내 숫자 6개를 입력하세요.";
+    private static final String ERROR_RANGE_OF_BONUS_NUMBER = "1~45 범위 내 숫자를 입력해주세요." ;
     private static final String ERROR_NOT_INCLUDED_COMMA = "쉼표를 구분자로 " + ERROR_RANGE_OF_LOTTO;
-    private static final String ERROR_DUPLICATED_SIX_NUMBER = "서로 다른 6개의 숫자를 입력해 주세요";
+    private static final String ERROR_DUPLICATED_SIX_NUMBER = "서로 다른 6개의 숫자를 입력해 주세요.";
+    private static final String ERROR_DUPLICATED_BONUS_NUMBER = "입력한 로또 숫자와는 다른 숫자를 입력해주세요.";
     private static final String ERROR_SIX_NUMBER = "숫자 6개를 입력하세요";
 
     public static void isValidPurchaseAmount(String purchaseAmount){
@@ -44,6 +47,20 @@ public class InputVerification {
         isDuplicated(numbers);
         isValidSize(numbers);
         isValidRangeOf(numbers);
+    }
+
+    public static void isValidBonusNumber(String bonusNumber, List<Integer> inputValueOfWinningNumbers){
+        isBlank(bonusNumber, ERROR_BLANK);
+        isNumber(bonusNumber,ERROR_OF_NOT_NUMBER);
+        int integerBonusNumber = toInt(bonusNumber);
+        isValidRangeOfBonus(integerBonusNumber);
+        isDuplicatedBonusNumber(integerBonusNumber, inputValueOfWinningNumbers);
+    }
+
+    private static void isDuplicatedBonusNumber(int bonusNumber, List<Integer> inputValueOfWinningNumbers){
+        if (inputValueOfWinningNumbers.contains(bonusNumber)){
+            throw new IllegalArgumentException(ERROR_DUPLICATED_BONUS_NUMBER);
+        }
     }
 
     private static void isValidStartOrEnd(String winningNumbers) {
@@ -107,6 +124,12 @@ public class InputVerification {
         }
     }
 
+    private static void isValidRangeOfBonus(int bonusNumber){
+        if (bonusNumber < MIN_RANGE_OF_LOTTO_NUMBER || bonusNumber > MAX_RANGE_OF_LOTTO_NUMBER){
+            throw new IllegalArgumentException(ERROR_RANGE_OF_BONUS_NUMBER);
+        }
+    }
+
     private static void isValidRangeOf(String[] numbers) {
         Arrays.stream(numbers)
             .mapToInt(numberString -> toInt(numberString))
@@ -128,7 +151,7 @@ public class InputVerification {
     private static void isNumber(String inputValue, String errorMessage){
         Matcher matcher = Pattern.compile(REGEX_NOT_DIGIT).matcher(inputValue);
         if (matcher.find()){
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(errorMessage);
         }
     }
 
