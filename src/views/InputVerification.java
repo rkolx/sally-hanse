@@ -28,6 +28,8 @@ public class InputVerification {
     private static final String ERROR_DUPLICATED_SIX_NUMBER = "서로 다른 6개의 숫자를 입력해 주세요.";
     private static final String ERROR_DUPLICATED_BONUS_NUMBER = "입력한 로또 숫자와는 다른 숫자를 입력해주세요.";
     private static final String ERROR_SIX_NUMBER = "숫자 6개를 입력하세요";
+    public static final String ERROR_RANGE_OUT_OF_MAUAL_LOTTO_SUFFIX = "장 이내로 입력해주세요.";
+    public static final String ERROR_RANGE_OUT_OF_MAUAL_LOTTO_PREFIX = "0~";
 
     public static void isValidPurchaseAmount(String purchaseAmount){
         String errorMessageWhenNotNumber = ERROR_OF_NOT_NUMBER + ERROR_APPENDED_THOUSAND_PER_SHEETS;
@@ -36,6 +38,13 @@ public class InputVerification {
         int integerPurchaseAmount = toInt(purchaseAmount);
         isThousandUnit(integerPurchaseAmount);
         isRange(integerPurchaseAmount);
+    }
+
+    public static void isValidManualPurchaseAmount(String manualPurchaseAmount, int numberOfTicket){
+        isBlank(manualPurchaseAmount, ERROR_BLANK);
+        isNumber(manualPurchaseAmount,ERROR_OF_NOT_NUMBER);
+        int IntegerManualPurchaseAmount = toInt(manualPurchaseAmount);
+        isRangeOfManualPurchaseAmount(IntegerManualPurchaseAmount, numberOfTicket);
     }
 
     public static void isValidWinningNumbers(String winningNumbers) {
@@ -49,16 +58,22 @@ public class InputVerification {
         isValidRangeOf(numbers);
     }
 
-    public static void isValidBonusNumber(String bonusNumber, List<Integer> inputValueOfWinningNumbers){
+    public static void isRangeOfManualPurchaseAmount(int manualPurchaseAmount, int numberOfTicket){
+        if (manualPurchaseAmount < 0 || manualPurchaseAmount > numberOfTicket){
+            throw new IllegalArgumentException(ERROR_RANGE_OUT_OF_MAUAL_LOTTO_PREFIX + numberOfTicket + ERROR_RANGE_OUT_OF_MAUAL_LOTTO_SUFFIX);
+        }
+    }
+
+    public static void isValidBonusNumber(String bonusNumber, List<Integer> winningNumbers){
         isBlank(bonusNumber, ERROR_BLANK);
         isNumber(bonusNumber,ERROR_OF_NOT_NUMBER);
         int integerBonusNumber = toInt(bonusNumber);
         isValidRangeOfBonus(integerBonusNumber);
-        isDuplicatedBonusNumber(integerBonusNumber, inputValueOfWinningNumbers);
+        isDuplicatedBonusNumber(integerBonusNumber, winningNumbers);
     }
 
-    private static void isDuplicatedBonusNumber(int bonusNumber, List<Integer> inputValueOfWinningNumbers){
-        if (inputValueOfWinningNumbers.contains(bonusNumber)){
+    private static void isDuplicatedBonusNumber(int bonusNumber, List<Integer> winningNumbers){
+        if (winningNumbers.contains(bonusNumber)){
             throw new IllegalArgumentException(ERROR_DUPLICATED_BONUS_NUMBER);
         }
     }
