@@ -16,9 +16,8 @@ public class LottoApplication {
 
 	public static void main(String[] args) {
 		PurchasedLotto purchasedLotto = purchaseLotto();
-		inputManualNumbers(3);
 		List<List<Integer>> totalLottos = userLotto.getTickets(purchasedLotto);
-		//showLottos(totalLottos);
+		showLottos(totalLottos);
 
 		List<Integer> inputValueOfWinningNumbers = inputWinningNumbers();
 		int bonusNumber = getBonusNumber(inputValueOfWinningNumbers);

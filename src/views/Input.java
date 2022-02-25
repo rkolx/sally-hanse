@@ -3,12 +3,12 @@ package views;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.Scanner;
 
 import static java.util.stream.Collectors.toList;
 import static views.InputVerification.*;
 import static views.Output.println;
-import static views.Output.prints;
 
 public class Input {
 	private static final Scanner scanner = new Scanner(System.in);
@@ -18,35 +18,71 @@ public class Input {
 	public static final String OUTPUT_ASK_WINNING_NUMBER = "당첨 번호를 입력해 주세요.";
 	public static final String OUTPUT_ASK_BONUSBALL = "보너스 볼을 입력해주세요.";
 	public static final String OUTPUT_ASK_OF_PURCHASING_MANUAL_LOTTO = "수동으로 구매할 로또 수를 입력해 주세요.";
-	public static final String OUTPUT_ASK_MANUAL_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
+	public static final String OUTPUT_ASK_OF_MANUAL_LOTTO_NUMBERS = "수동으로 구매할 번호를 입력해 주세요.";
 
 	public Input() {
 	}
 
+	public static PurchasedLotto purchaseLotto() {
+		int purchaseAmount = getPurchaseAmount();
+		int numberOfTicket = getNumberOfTicket(purchaseAmount);
+		int numberOfPurchasingManual = getManualPurchaseAmount(numberOfTicket); 
+
+		if (numberOfPurchasingManual >= 0) {
+			List<List<Integer>> manualNumbers = getManualNumbers(numberOfPurchasingManual);
+			return new PurchasedLotto(purchaseAmount, numberOfTicket, Optional.of(manualNumbers));
+		}
+		return new PurchasedLotto(purchaseAmount, numberOfTicket, Optional.empty());  // TODO  Optional 사용방법 확인
+	}
+
 	public static int getPurchaseAmount() {
-		println.accept(OUTPUT_ASK_PURCHASE_AMOUNT);
-		String purchaseAmount = nextLine();
-		isValidPurchaseAmount(purchaseAmount);
-		return toInt(purchaseAmount);
+		try {
+			println.accept(OUTPUT_ASK_PURCHASE_AMOUNT);
+			String purchaseAmount = nextLine();
+			isValidPurchaseAmount(purchaseAmount);
+			return toInt(purchaseAmount);
+		} catch (IllegalArgumentException exception) {
+			println.accept(exception.getMessage());
+			return getPurchaseAmount();
+		}
+	}
+
+	public static int getNumberOfTicket(int purchaseAmount) {
+		int numberOfTicket = purchaseAmount / PRICE_OF_ONE_LOTTO;
+		println.accept(informPurchasing(numberOfTicket));
+		return numberOfTicket;
 	}
 
 	public static int getManualPurchaseAmount(int numberOfTicket){
 		println.accept(OUTPUT_ASK_OF_PURCHASING_MANUAL_LOTTO);
 		String manualPurchaseAmount = nextLine();
-		isValidManualPurchaseAmount(manualPurchaseAmount, numberOfTicket);
+		isValidNumberOfPurchasingManuals(manualPurchaseAmount, numberOfTicket);
 		return toInt(manualPurchaseAmount);
 	}
 
-	public static List<List<Integer>> inputManualNumbers(int numberOfTicket){
-		println.accept(OUTPUT_ASK_MANUAL_NUMBERS);
-		return getManualLottoNumbers(numberOfTicket);
+	public static List<List<Integer>> getManualNumbers(int numberOfManualTicket){
+		println.accept(OUTPUT_ASK_OF_MANUAL_LOTTO_NUMBERS);
+		List<String> manualNumbers = inputManualNumbers(numberOfManualTicket);
+		isValidManualNumbers(manualNumbers);
+		List<List<Integer>> changedManualNumbers = getManualLottoNumbers(manualNumbers);
+		return changedManualNumbers;
 	}
 
-	private static List<List<Integer>> getManualLottoNumbers(int numberOfTicket) {
+	private static List<String> inputManualNumbers(int numberOfManualTicket) {
+		List<String> inputValues = new ArrayList<>();
+		for (int i = 0; i < numberOfManualTicket; i++) {
+			String inputManualSixNumber = nextLine();
+			inputValues.add(inputManualSixNumber);
+		}
+		return inputValues;
+	}
+
+	private static List<List<Integer>> getManualLottoNumbers(List<String> manualNumbers) {
 		List<List<Integer>> manualLottoNumbers = new ArrayList<>();
-		for (int i = 0; i < numberOfTicket; i++) {
-			String pickManualSixNumber = nextLine();
-			manualLottoNumbers.add(toInteger(pickManualSixNumber));
+		for (int i = 0; i < manualNumbers.size(); i++) {
+			String textOfManualNumber = manualNumbers.get(i);
+			List<Integer> manualSixNumbers = splitAndToInt(textOfManualNumber);
+			manualLottoNumbers.add(manualSixNumbers);
 		}
 		return manualLottoNumbers;
 	}
@@ -62,27 +98,14 @@ public class Input {
 		println.accept(OUTPUT_ASK_WINNING_NUMBER);
 		String textNumbers = nextLine();
 		isValidWinningNumbers(textNumbers);
-		List<Integer> winningNumbers = toInteger(textNumbers);
+		List<Integer> winningNumbers = splitAndToInt(textNumbers);
 		return winningNumbers;
 	}
 
-	private static List<Integer> toInteger(String textNumbers) {
-		return Arrays.stream(textNumbers.split(","))
-				.map(Integer::parseInt)
-				.collect(toList());
-	}
-
-	public static PurchasedLotto purchaseLotto() {
-		int purchaseAmount = getPurchaseAmount();
-		int numberOfTicket = getTicketAccount(purchaseAmount);
-		int manualPurchaseAmount = getManualPurchaseAmount(numberOfTicket); // TODO
-		return new PurchasedLotto(purchaseAmount, numberOfTicket, manualPurchaseAmount);
-	}
-
-	public static int getTicketAccount(int purchaseAmount) {
-		int ticketAccount = purchaseAmount / PRICE_OF_ONE_LOTTO;
-		println.accept(informPurchasing(ticketAccount));
-		return ticketAccount;
+	private static List<Integer> splitAndToInt(String textNumbers) {
+		return Arrays.stream(textNumbers.split(SYMBOL_SEPARATOR))
+			.map(Integer::parseInt)
+			.collect(toList());
 	}
 
 	private static String informPurchasing(int ticketAccount) {

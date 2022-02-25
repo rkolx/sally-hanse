@@ -11,7 +11,7 @@ public class InputVerification {
     private static final int MIN_RANGE_OF_LOTTO_NUMBER = 1;
     private static final int MAX_RANGE_OF_LOTTO_NUMBER = 45;
 
-    private static final String SYMBOL_SEPARATOR = ",";
+    public static final String SYMBOL_SEPARATOR = ",";
     private static final String REGEX_NOT_DIGIT = "[^0-9]";
     private static final String SEPARATOR_REGEX = "[\\,]+";
     private static final int MAX_LIMITED_AMOUNT = 1_000_000;
@@ -28,8 +28,8 @@ public class InputVerification {
     private static final String ERROR_DUPLICATED_SIX_NUMBER = "서로 다른 6개의 숫자를 입력해 주세요.";
     private static final String ERROR_DUPLICATED_BONUS_NUMBER = "입력한 로또 숫자와는 다른 숫자를 입력해주세요.";
     private static final String ERROR_SIX_NUMBER = "숫자 6개를 입력하세요";
-    public static final String ERROR_RANGE_OUT_OF_MAUAL_LOTTO_SUFFIX = "장 이내로 입력해주세요.";
-    public static final String ERROR_RANGE_OUT_OF_MAUAL_LOTTO_PREFIX = "0~";
+    public static final String ERROR_RANGE_OUT_OF_MANUAL_LOTTO_PREFIX = "0~";
+    public static final String ERROR_RANGE_OUT_OF_MANUAL_LOTTO_SUFFIX = "장 이내로 입력해주세요.";
 
     public static void isValidPurchaseAmount(String purchaseAmount){
         String errorMessageWhenNotNumber = ERROR_OF_NOT_NUMBER + ERROR_APPENDED_THOUSAND_PER_SHEETS;
@@ -40,27 +40,62 @@ public class InputVerification {
         isRange(integerPurchaseAmount);
     }
 
-    public static void isValidManualPurchaseAmount(String manualPurchaseAmount, int numberOfTicket){
+    public static void isValidNumberOfPurchasingManuals(String manualPurchaseAmount, int numberOfTicket){
         isBlank(manualPurchaseAmount, ERROR_BLANK);
         isNumber(manualPurchaseAmount,ERROR_OF_NOT_NUMBER);
         int IntegerManualPurchaseAmount = toInt(manualPurchaseAmount);
         isRangeOfManualPurchaseAmount(IntegerManualPurchaseAmount, numberOfTicket);
     }
 
+    public static void isValidManualNumbers(List<String> manualNumbers) {
+        isBlankLine(manualNumbers);
+        isValidStartOrEndLine(manualNumbers);
+        isRulesOfInputLine(manualNumbers);
+        isValidEachOfLineWithSixNumbers(manualNumbers);
+    }
+
     public static void isValidWinningNumbers(String winningNumbers) {
         isBlank(winningNumbers, ERROR_BLANK);
         isValidStartOrEnd(winningNumbers);
         isRulesOfInput(winningNumbers);
-        String[] numbers = getSplit(winningNumbers);
+        isValidSixNumbers(winningNumbers);
+    }
+
+    private static void isValidSixNumbers(String sixNumbers) {
+        String[] numbers = getSplit(sixNumbers);
         isNumberOfSix(numbers);
         isDuplicated(numbers);
         isValidSize(numbers);
         isValidRangeOf(numbers);
     }
 
+    private static void isRulesOfInputLine(List<String> manualNumbers) {
+        for (String manualNumber : manualNumbers) {
+            isRulesOfInput(manualNumber);
+        }
+    }
+
+    private static void isBlankLine(List<String> manualNumbers) {
+        for (String manualNumber : manualNumbers) {
+            isBlank(manualNumber, ERROR_BLANK);
+        }
+    }
+
+    private static void isValidStartOrEndLine(List<String> manualNumbers) {
+        for (String manualNumber : manualNumbers) {
+            isValidStartOrEnd(manualNumber);
+        }
+    }
+
+    private static void isValidEachOfLineWithSixNumbers(List<String> manualNumbers) {
+        for (String manualNumber : manualNumbers) {
+            isValidSixNumbers(manualNumber);
+        }
+    }
+
     public static void isRangeOfManualPurchaseAmount(int manualPurchaseAmount, int numberOfTicket){
         if (manualPurchaseAmount < 0 || manualPurchaseAmount > numberOfTicket){
-            throw new IllegalArgumentException(ERROR_RANGE_OUT_OF_MAUAL_LOTTO_PREFIX + numberOfTicket + ERROR_RANGE_OUT_OF_MAUAL_LOTTO_SUFFIX);
+            throw new IllegalArgumentException(ERROR_RANGE_OUT_OF_MANUAL_LOTTO_PREFIX + numberOfTicket + ERROR_RANGE_OUT_OF_MANUAL_LOTTO_SUFFIX);
         }
     }
 
