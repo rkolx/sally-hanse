@@ -54,18 +54,28 @@ public class Input {
 	}
 
 	public static int getManualPurchaseAmount(int numberOfTicket){
-		println.accept(OUTPUT_ASK_OF_PURCHASING_MANUAL_LOTTO);
-		String manualPurchaseAmount = nextLine();
-		isValidNumberOfPurchasingManuals(manualPurchaseAmount, numberOfTicket);
-		return toInt(manualPurchaseAmount);
+		try	{
+			println.accept(OUTPUT_ASK_OF_PURCHASING_MANUAL_LOTTO);
+			String manualPurchaseAmount = nextLine();
+			isValidNumberOfPurchasingManuals(manualPurchaseAmount, numberOfTicket);
+			return toInt(manualPurchaseAmount);
+		} catch (IllegalArgumentException exception){
+			println.accept(exception.getMessage());
+			return getManualPurchaseAmount(numberOfTicket);
+		}
 	}
 
 	public static List<List<Integer>> getManualNumbers(int numberOfManualTicket){
-		println.accept(OUTPUT_ASK_OF_MANUAL_LOTTO_NUMBERS);
-		List<String> manualNumbers = inputManualNumbers(numberOfManualTicket);
-		isValidManualNumbers(manualNumbers);
-		List<List<Integer>> changedManualNumbers = getManualLottoNumbers(manualNumbers);
-		return changedManualNumbers;
+		try {
+			println.accept(OUTPUT_ASK_OF_MANUAL_LOTTO_NUMBERS);
+			List<String> manualNumbers = inputManualNumbers(numberOfManualTicket);
+			isValidManualNumbers(manualNumbers);
+			List<List<Integer>> changedManualNumbers = getManualLottoNumbers(manualNumbers);
+			return changedManualNumbers;
+		} catch (IllegalArgumentException exception){
+			println.accept(exception.getMessage());
+			return getManualNumbers(numberOfManualTicket);
+		}
 	}
 
 	private static List<String> inputManualNumbers(int numberOfManualTicket) {
@@ -88,18 +98,28 @@ public class Input {
 	}
 
 	public static int getBonusNumber(List<Integer> inputValueOfWinningNumbers){
-		println.accept(OUTPUT_ASK_BONUSBALL);
-		String bonusNumber = nextLine();
-		isValidBonusNumber(bonusNumber, inputValueOfWinningNumbers);
-		return toInt(bonusNumber);
+		try {
+			println.accept(OUTPUT_ASK_BONUSBALL);
+			String bonusNumber = nextLine();
+			isValidBonusNumber(bonusNumber, inputValueOfWinningNumbers);
+			return toInt(bonusNumber);
+		} catch (IllegalArgumentException exception){
+			println.accept(exception.getMessage());
+			return getBonusNumber(inputValueOfWinningNumbers);
+		}
 	}
 
 	public static List<Integer> inputWinningNumbers(){
-		println.accept(OUTPUT_ASK_WINNING_NUMBER);
-		String textNumbers = nextLine();
-		isValidWinningNumbers(textNumbers);
-		List<Integer> winningNumbers = splitAndToInt(textNumbers);
-		return winningNumbers;
+		try {
+			println.accept(OUTPUT_ASK_WINNING_NUMBER);
+			String textNumbers = nextLine();
+			isValidWinningNumbers(textNumbers);
+			List<Integer> winningNumbers = splitAndToInt(textNumbers);
+			return winningNumbers;
+		} catch (IllegalArgumentException exception){
+			println.accept(exception.getMessage());
+			return inputWinningNumbers();
+		}
 	}
 
 	private static List<Integer> splitAndToInt(String textNumbers) {

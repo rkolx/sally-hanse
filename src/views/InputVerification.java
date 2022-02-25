@@ -19,8 +19,7 @@ public class InputVerification {
     private static final String ERROR_PURCHASE_AMOUNT_BLANK = "구입 금액을 입력해주세요.(공백은 안됩니다)";
     private static final String ERROR_BLANK = "공백은 안됩니다.";
     public static final String ERROR_APPENDED_THOUSAND_PER_SHEETS = "[1장:1000원]";
-    private static final String ERROR_OF_NOT_NUMBER = "숫자로만 입력해주세요. ";
-    private static final String ERROR_NOT_THOUSAND_UNIT = "장당 천원입니다.";
+    private static final String ERROR_NOT_THOUSAND_UNIT = "천원 단위로 입력해 주세요.";
     private static final String ERROR_OUT_OF_RANGE = "최소 천원 이상 최대 십만원 이하로 구매 가능합니다. " + ERROR_APPENDED_THOUSAND_PER_SHEETS;
     private static final String ERROR_RANGE_OF_LOTTO = "1~45 범위내 숫자 6개를 입력하세요.";
     private static final String ERROR_RANGE_OF_BONUS_NUMBER = "1~45 범위 내 숫자를 입력해주세요." ;
@@ -32,7 +31,7 @@ public class InputVerification {
     public static final String ERROR_RANGE_OUT_OF_MANUAL_LOTTO_SUFFIX = "장 이내로 입력해주세요.";
 
     public static void isValidPurchaseAmount(String purchaseAmount){
-        String errorMessageWhenNotNumber = ERROR_OF_NOT_NUMBER + ERROR_APPENDED_THOUSAND_PER_SHEETS;
+        String errorMessageWhenNotNumber = ERROR_NOT_THOUSAND_UNIT + ERROR_APPENDED_THOUSAND_PER_SHEETS;
         isBlank(purchaseAmount, ERROR_PURCHASE_AMOUNT_BLANK);
         isNumber(purchaseAmount, errorMessageWhenNotNumber);
         int integerPurchaseAmount = toInt(purchaseAmount);
@@ -41,13 +40,16 @@ public class InputVerification {
     }
 
     public static void isValidNumberOfPurchasingManuals(String manualPurchaseAmount, int numberOfTicket){
+        // TODO : errorMessageWhenNotNumber 중복 with isRangeOfManualPurchaseAmount
+        String errorMessageWhenNotNumber = ERROR_RANGE_OUT_OF_MANUAL_LOTTO_PREFIX + numberOfTicket + ERROR_RANGE_OUT_OF_MANUAL_LOTTO_SUFFIX;
         isBlank(manualPurchaseAmount, ERROR_BLANK);
-        isNumber(manualPurchaseAmount,ERROR_OF_NOT_NUMBER);
+        isNumber(manualPurchaseAmount,errorMessageWhenNotNumber);
         int IntegerManualPurchaseAmount = toInt(manualPurchaseAmount);
         isRangeOfManualPurchaseAmount(IntegerManualPurchaseAmount, numberOfTicket);
     }
 
     public static void isValidManualNumbers(List<String> manualNumbers) {
+        //TODO : 중복 -> isValidEachOfLineWithSixNumbers
         isBlankLine(manualNumbers);
         isValidStartOrEndLine(manualNumbers);
         isRulesOfInputLine(manualNumbers);
@@ -101,7 +103,8 @@ public class InputVerification {
 
     public static void isValidBonusNumber(String bonusNumber, List<Integer> winningNumbers){
         isBlank(bonusNumber, ERROR_BLANK);
-        isNumber(bonusNumber,ERROR_OF_NOT_NUMBER);
+        isValidStartOrEnd(bonusNumber);
+        isNumber(bonusNumber,ERROR_RANGE_OF_BONUS_NUMBER);
         int integerBonusNumber = toInt(bonusNumber);
         isValidRangeOfBonus(integerBonusNumber);
         isDuplicatedBonusNumber(integerBonusNumber, winningNumbers);
@@ -152,7 +155,7 @@ public class InputVerification {
 
     private static void isNumberOfSix(String[] sixNumbers) {
         Arrays.stream(sixNumbers)
-            .forEach(number -> isNumber(number, ERROR_OF_NOT_NUMBER));
+            .forEach(number -> isNumber(number, ERROR_RANGE_OF_LOTTO));
     }
 
     private static void isDuplicated(String[] numbers) {

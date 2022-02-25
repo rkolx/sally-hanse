@@ -3,8 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="6f3bfd70-6d9f-4e50-81f4-4737cc8c397f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/LottoApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LottoApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/domains/users/LottoMachine.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/domains/users/LottoMachine.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sally/views/Input.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sally/views/Input.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/sally/views/InputVerification.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/sally/views/InputVerification.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/Input.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/Input.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/InputVerification.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/InputVerification.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/views/PurchasedLotto.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/views/PurchasedLotto.java" afterDir="false" />
