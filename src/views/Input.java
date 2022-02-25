@@ -13,12 +13,20 @@ public class Input {
 	public static final String OUTPUT_ASK_PURCHASE_AMOUNT = "구입금액을 입력해 주세요.";
 	public static final String OUTPUT_NUMBER_OF_PURCHASED = "개를 구매했습니다.";
 	public static final String OUTPUT_ASK_WINNING_NUMBER = "당첨 번호를 입력해 주세요.";
+	public static final String OUTPUT_ASK_BONUSBALL = "보너스 볼을 입력해주세요.";
 
 	public Input() {
 	}
 
+	public static int getPurchaseAmount() {
+		println.accept(OUTPUT_ASK_PURCHASE_AMOUNT);
+		String purchaseAmount = nextLine();
+		InputVerification.isValidPurchaseAmount(purchaseAmount);
+		return Integer.parseInt(purchaseAmount);
+	}
+
 	public static int getBonusNumber(){
-		println.accept("보너스 볼을 입력해주세요.");
+		println.accept(OUTPUT_ASK_BONUSBALL);
 		int bonusNumber = nextInt();
 		return bonusNumber;
 	}
@@ -40,12 +48,6 @@ public class Input {
 		int purchaseAmount = getPurchaseAmount();
 		int numberOfTicket = getTicketAccount(purchaseAmount);
 		return new PurchasedLotto(purchaseAmount, numberOfTicket);
-	}
-
-	public static int getPurchaseAmount() {
-		println.accept(OUTPUT_ASK_PURCHASE_AMOUNT);
-		int purchaseAmount = nextInt();
-		return purchaseAmount;
 	}
 
 	public static int getTicketAccount(int purchaseAmount) {
